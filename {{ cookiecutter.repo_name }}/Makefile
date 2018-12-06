@@ -84,7 +84,6 @@ init-docker:
 docker-run:
 	docker-compose -p $(PROJECT_NAME) -f docker/docker-compose.yml up
 
-
 ## Test python environment is setup correctly
 test_environment:
 	$(PYTHON_INTERPRETER) test_environment.py
