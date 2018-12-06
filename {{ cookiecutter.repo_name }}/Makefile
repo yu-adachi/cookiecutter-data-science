@@ -9,12 +9,8 @@ BUCKET = {{ cookiecutter.s3_bucket }}
 PROFILE = {{ cookiecutter.aws_profile }}
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
-
 IMAGE_NAME=$(PROJECT_NAME)-image
 CONTAINER_NAME=$(PROJECT_NAME)-container
-DATA_SOURCE={{ cookiecutter.data_source }}
-JUPYTER_HOST_PORT={{ cookiecutter.jupyter_host_port }}
-JUPYTER_CONTAINER_PORT=8888
 PYTHON=python3
 DOCKERFILE=docker/Dockerfile
 
