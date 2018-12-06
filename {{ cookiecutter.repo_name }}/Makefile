@@ -10,6 +10,14 @@ PROFILE = {{ cookiecutter.aws_profile }}
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
 
+IMAGE_NAME=$(PROJECT_NAME)-image
+CONTAINER_NAME=$(PROJECT_NAME)-container
+DATA_SOURCE={{ cookiecutter.data_source }}
+JUPYTER_HOST_PORT={{ cookiecutter.jupyter_host_port }}
+JUPYTER_CONTAINER_PORT=8888
+PYTHON=python3
+DOCKERFILE=docker/Dockerfile
+
 ifeq (,$(shell which conda))
 HAS_CONDA=False
 else
@@ -72,9 +80,29 @@ else
 	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
 endif
 
+## initialize docker image
+init-docker:
+	$(DOCKER) build -t $(IMAGE_NAME) -f $(DOCKERFILE) --build-arg UID=$(shell id -u) .
+	docker-compose -f docker/docker-compose.yml build
+
+## docker run
+docker-run:
+	docker-compose -p $(PROJECT_NAME) -f docker/docker-compose.yml up
+
+
 ## Test python environment is setup correctly
 test_environment:
 	$(PYTHON_INTERPRETER) test_environment.py
+
+clean: clean-model clean-pyc clean-docker ## remove all artifacts
+
+clean-docker: clean-container clean-image ## remove Docker image and container
+
+clean-container: ## remove Docker container
+	-$(DOCKER) rm $(CONTAINER_NAME)
+
+clean-image: ## remove Docker image
+	-$(DOCKER) image rm $(IMAGE_NAME)
 
 #################################################################################
 # PROJECT RULES                                                                 #
