@@ -26,10 +26,19 @@ $ conda install cookiecutter
 ### To start a new project, run:
 ------------
 
-    cookiecutter https://github.com/drivendata/cookiecutter-data-science
+    cookiecutter git@github.com:yu-adachi/cookiecutter-data-science.git
 
 
 [![asciicast](https://asciinema.org/a/9bgl5qh17wlop4xyxu9n9wr02.png)](https://asciinema.org/a/9bgl5qh17wlop4xyxu9n9wr02)
+
+### To start docker, run:
+
+``` bash
+$ make init-docker
+$ make docker-run
+```
+and access `localhost:8888` via web browser.
+
 
 
 ### The resulting directory structure
@@ -82,10 +91,23 @@ The directory structure of your new project looks like this:
 │
 └── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
 ```
+### Makefile targets
 
-## Contributing
+Cookiecutter Docker Science provides many Makefile targets to supports experiments in a Docker container. Users can run the target with make [TARGET] command.
 
-We welcome contributions! [See the docs for guidelines](https://drivendata.github.io/cookiecutter-data-science/#contributing).
+#### init
+
+After cootiecutter-docker-science generate the directories and files, users first run this command. init setups resources for experiments. Specifically init run init-docker and sync-from-source command.
+```bash
+$make init-docker
+```
+init-docker command first creates Docker the images based on docker/Dockerfile.
+
+```bash
+$make docker-run
+```
+docker-run command
+
 
 ### Installing development requirements
 ------------
@@ -96,3 +118,6 @@ We welcome contributions! [See the docs for guidelines](https://drivendata.githu
 ------------
 
     py.test tests
+
+Inspired
+https://github.com/docker-science/cookiecutter-docker-science#makefile-targets
