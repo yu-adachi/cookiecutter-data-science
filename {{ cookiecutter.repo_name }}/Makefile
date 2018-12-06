@@ -7,12 +7,12 @@
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 BUCKET = {{ cookiecutter.s3_bucket }}
 PROFILE = {{ cookiecutter.aws_profile }}
-PROJECT_NAME = {{ cookiecutter.repo_name }}
-PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
-IMAGE_NAME=$(PROJECT_NAME)-image
-CONTAINER_NAME=$(PROJECT_NAME)-container
-PYTHON=python3
-DOCKERFILE=docker/Dockerfile
+export PROJECT_NAME = {{ cookiecutter.repo_name }}
+export PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
+export IMAGE_NAME=$(PROJECT_NAME)-image
+export CONTAINER_NAME=$(PROJECT_NAME)-container
+export PYTHON=python3
+export DOCKERFILE=docker/Dockerfile
 
 ifeq (,$(shell which conda))
 HAS_CONDA=False
@@ -77,7 +77,7 @@ else
 endif
 
 ## initialize docker image
-init-docker:
+docker-init:
 	docker-compose -f docker/docker-compose.yml build
 
 ## docker run
