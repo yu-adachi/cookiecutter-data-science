@@ -87,3 +87,15 @@ target/
 # vim
 *.swp
 *.swo
+
+# model
+.model
+.mod
+
+# pickle
+.dump
+.pkl
+.pickle
+
+# data
+.csv
