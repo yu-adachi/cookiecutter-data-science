@@ -4,11 +4,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-
     environment:
       JUPYTER_ENABLE_LAB: 1
     ports:
       - 8888:8888
     volumes:
-      - ./:/home/jovyan/work
+      - ../:/home/jovyan/work
     command: start-notebook.sh --NotebookApp.token=''

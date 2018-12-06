@@ -78,7 +78,6 @@ endif
 
 ## initialize docker image
 init-docker:
-	$(DOCKER) build -t $(IMAGE_NAME) -f $(DOCKERFILE) --build-arg UID=$(shell id -u) .
 	docker-compose -f docker/docker-compose.yml build
 
 ## docker run
