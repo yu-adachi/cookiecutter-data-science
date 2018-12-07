@@ -1,4 +1,4 @@
-.PHONY: clean data lint requirements
+.PHONY: clean data lint requirements create_environment clean
 
 #################################################################################
 # GLOBALS                                                                       #
@@ -56,7 +56,6 @@ endif
 
 ## initialize docker image
 init-docker:
-	cp requirements.txt ./docker/requirements.txt
 	docker-compose -f docker/docker-compose.yml build
 
 ## docker run
@@ -67,7 +66,8 @@ run-docker:
 test_environment:
 	$(PYTHON_INTERPRETER) test_environment.py
 
-clean: clean-model clean-docker ## remove all artifacts
+clean:
+	clean-model clean-docker ## remove all artifacts
 
 clean-docker: clean-container clean-image ## remove Docker image and container
 
