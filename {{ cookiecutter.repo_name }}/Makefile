@@ -56,10 +56,11 @@ endif
 
 ## initialize docker image
 init-docker:
+	cp requirements.txt ./docker/requirements.txt
 	docker-compose -f docker/docker-compose.yml build
 
 ## docker run
-docker-run:
+run-docker:
 	docker-compose -p $(PROJECT_NAME) -f docker/docker-compose.yml up
 
 ## Test python environment is setup correctly
