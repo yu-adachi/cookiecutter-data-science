@@ -6,6 +6,7 @@ services:
       dockerfile: Dockerfile
     environment:
       JUPYTER_ENABLE_LAB: 1
+      HOME: /home/jovyan/${PROJECT_NAME}
     ports:
       - 8888:8888
     volumes:
